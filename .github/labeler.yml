@@ -1,0 +1,15 @@
+doc:
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.md'
+
+feature:
+  - head-branch: ['^feature', 'feature']
+
+fix:
+  - head-branch: ['^fix', 'fix']
+
+tf:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.tf'
