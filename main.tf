@@ -76,11 +76,11 @@ resource "github_repository" "repository" {
     # }
 
     secret_scanning {
-      status = var.security_and_analysis.secret_scanning.status
+      status = (var.visibility == "private" ? "disabled" : var.security_and_analysis.secret_scanning.status)
     }
 
     secret_scanning_push_protection {
-      status = var.security_and_analysis.secret_scanning_push_protection.status
+      status = (var.visibility == "private" ? "disabled" : var.security_and_analysis.secret_scanning_push_protection.status)
     }
   }
 }
