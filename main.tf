@@ -71,13 +71,13 @@ resource "github_repository" "repository" {
   }
 
   security_and_analysis {
-    dynamic "advanced_security" {
-      for_each = var.visibility == "public" ? [1] : []
+    # dynamic "advanced_security" {
+    #   for_each = var.visibility == "public" ? [1] : []
 
-      content {
-        status = var.security_and_analysis.advanced_security.status
-      }
-    }
+    #   content {
+    #     status = var.security_and_analysis.advanced_security.status
+    #   }
+    # }
 
     dynamic "secret_scanning" {
       for_each = var.visibility == "public" ? [1] : []
