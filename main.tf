@@ -71,16 +71,28 @@ resource "github_repository" "repository" {
   }
 
   security_and_analysis {
-    # advanced_security {
-    #   status = var.security_and_analysis.advanced_security.status
-    # }
+    dynamic "advanced_security" {
+      for_each = var.visibility == "public" ? [1] : []
 
-    secret_scanning {
-      status = (var.visibility == "private" ? "disabled" : var.security_and_analysis.secret_scanning.status)
+      content {
+        status = var.security_and_analysis.advanced_security.status
+      }
     }
 
-    secret_scanning_push_protection {
-      status = (var.visibility == "private" ? "disabled" : var.security_and_analysis.secret_scanning_push_protection.status)
+    dynamic "secret_scanning" {
+      for_each = var.visibility == "public" ? [1] : []
+
+      content {
+        status = var.security_and_analysis.secret_scanning.status
+      }
+    }
+
+    dynamic "secret_scanning_push_protection" {
+      for_each = var.visibility == "public" ? [1] : []
+
+      content {
+        status = var.security_and_analysis.secret_scanning_push_protection.status
+      }
     }
   }
 }
