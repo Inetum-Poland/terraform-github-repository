@@ -70,28 +70,32 @@ resource "github_repository" "repository" {
     }
   }
 
-  security_and_analysis {
-    # dynamic "advanced_security" {
-    #   for_each = var.visibility == "public" ? [1] : []
+  dynamic "security_and_analysis" {
+    for_each = var.visibility == "public" ? [1] : []
 
-    #   content {
-    #     status = var.security_and_analysis.advanced_security.status
-    #   }
-    # }
+    content {
+      # dynamic "advanced_security" {
+      #   for_each = var.visibility == "public" ? [1] : []
 
-    dynamic "secret_scanning" {
-      for_each = var.visibility == "public" ? [1] : []
+      #   content {
+      #     status = var.security_and_analysis.advanced_security.status
+      #   }
+      # }
 
-      content {
-        status = var.security_and_analysis.secret_scanning.status
+      dynamic "secret_scanning" {
+        for_each = var.visibility == "public" ? [1] : []
+
+        content {
+          status = var.security_and_analysis.secret_scanning.status
+        }
       }
-    }
 
-    dynamic "secret_scanning_push_protection" {
-      for_each = var.visibility == "public" ? [1] : []
+      dynamic "secret_scanning_push_protection" {
+        for_each = var.visibility == "public" ? [1] : []
 
-      content {
-        status = var.security_and_analysis.secret_scanning_push_protection.status
+        content {
+          status = var.security_and_analysis.secret_scanning_push_protection.status
+        }
       }
     }
   }
