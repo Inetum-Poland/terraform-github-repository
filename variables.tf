@@ -3,7 +3,7 @@ variable "name" {
   description = "The name of the repository."
 
   validation {
-    condition     = length(var.name) > 0
+    condition     = length(var.name) > 0 && !contains(["_"], var.name)
     error_message = "Must not be empty"
   }
 }
