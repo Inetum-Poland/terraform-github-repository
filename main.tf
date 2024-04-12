@@ -138,3 +138,19 @@ resource "github_branch_protection" "branch" {
     }
   }
 }
+
+resource "github_actions_variable" "variable" {
+  for_each = var.github_actions_variable
+
+  repository    = github_repository.repository.id
+  variable_name = each.key
+  value         = each.value
+}
+
+resource "github_actions_secret" "secret" {
+  for_each = var.github_actions_secret
+
+  repository      = github_repository.repository.id
+  secret_name     = each.key
+  encrypted_value = each.value
+}

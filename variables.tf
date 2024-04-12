@@ -120,7 +120,23 @@ variable "github_branch_protection" {
     }), {})
   }))
 
-  description = "Branch protection repository settings object `github_repository`."
+  description = "Branch protection repository settings object `github_branch_protection`."
 
   default = { main = { pattern = "main" } }
+}
+
+variable "github_actions_variable" {
+  type = map(string)
+
+  description = "Actions variable repository settings object `github_actions_variable`."
+
+  default = {}
+}
+
+variable "github_actions_secret" {
+  type = map(string)
+
+  description = "Actions secret repository settings object `github_actions_secret`."
+
+  default = {}
 }
