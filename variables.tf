@@ -100,7 +100,7 @@ variable "github_branch_protection" {
     allows_deletions                = optional(bool, false)
     allows_force_pushes             = optional(bool, false)
     enforce_admins                  = optional(bool, false)
-    force_push_bypassers            = optional(list(string), ["Inetum-Poland/principal"])
+    force_push_bypassers            = optional(list(string), [])
     lock_branch                     = optional(bool, false)
     require_conversation_resolution = optional(bool, true)
     require_signed_commits          = optional(bool, false)
