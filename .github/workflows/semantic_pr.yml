@@ -1,12 +1,10 @@
-name: semantic_pr_name
-
 on:
   pull_request:
     branches:
       - main
 
 jobs:
-  validate:
+  semantic_pr_name:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

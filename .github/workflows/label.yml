@@ -1,5 +1,3 @@
-name: laberer
-
 on:
   pull_request:
 

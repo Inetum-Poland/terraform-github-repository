@@ -60,37 +60,22 @@ variable "github_repository" {
   })
 
   description = "Repository settings object `github_repository`."
+}
 
-  validation {
-    condition     = length(var.github_repository.name) > 0 && !contains(["_"], var.github_repository.name)
-    error_message = "Must not be empty nor contain an underscore (_)."
-  }
+variable "github_branch" {
+  type = list(string)
 
-  validation {
-    condition     = contains(["private", "public"], var.github_repository.visibility)
-    error_message = "Must be one of 'private', 'public'."
-  }
+  description = "Branch repository settings object `github_branch`."
 
-  validation {
-    condition = (
-      contains(["enabled", "disabled"], coalesce(var.github_repository.security_and_analysis, { advanced_security = { status = "enabled" } }).advanced_security.status, )
-    )
-    error_message = "Must be enabled or disabled"
-  }
+  default = ["main"]
+}
 
-  validation {
-    condition = (
-      contains(["enabled", "disabled"], coalesce(var.github_repository.security_and_analysis, { secret_scanning = { status = "enabled" } }).secret_scanning.status)
-    )
-    error_message = "Must be enabled or disabled"
-  }
+variable "github_branch_default" {
+  type = string
 
-  validation {
-    condition = (
-      contains(["enabled", "disabled"], coalesce(var.github_repository.security_and_analysis, { secret_scanning_push_protection = { status = "enabled" } }).secret_scanning_push_protection.status)
-    )
-    error_message = "Must be enabled or disabled"
-  }
+  description = "Default branch repository settings object `github_branch_default`."
+
+  default = "main"
 }
 
 variable "github_branch_protection" {
