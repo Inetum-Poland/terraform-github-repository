@@ -125,3 +125,11 @@ variable "github_actions_secret" {
 
   default = {}
 }
+
+variable "github_dependabot_secret" {
+  type = map(string)
+
+  description = "Dependabot secret repository settings object `github_dependabot_secret`."
+
+  default = {}
+}

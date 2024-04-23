@@ -183,3 +183,13 @@ resource "github_actions_secret" "secret" {
 
   depends_on = [github_repository.repository]
 }
+
+resource "github_dependabot_secret" "secret" {
+  for_each = var.github_dependabot_secret
+
+  repository      = github_repository.repository.id
+  secret_name     = each.key
+  encrypted_value = each.value
+
+  depends_on = [github_repository.repository]
+}
