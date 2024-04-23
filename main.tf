@@ -101,6 +101,22 @@ resource "github_repository" "repository" {
   }
 }
 
+resource "github_branch" "branch" {
+  for_each = toset(var.github_branch)
+
+  repository = github_repository.repository.id
+  branch     = each.value
+
+  depends_on = [github_repository.repository]
+}
+
+resource "github_branch_default" "branch" {
+  repository = github_repository.repository.id
+  branch     = var.github_branch_default
+
+  depends_on = [github_repository.repository]
+}
+
 #trivy:ignore:AVD-GIT-0004 No need to sign commits
 resource "github_branch_protection" "branch" {
   for_each = var.github_branch_protection
@@ -137,6 +153,15 @@ resource "github_branch_protection" "branch" {
       contexts = each.value.required_status_checks.contexts
     }
   }
+
+  depends_on = [
+    github_branch_default.branch,
+    github_repository.repository
+  ]
+
+  lifecycle {
+    replace_triggered_by = [github_repository.repository.id]
+  }
 }
 
 resource "github_actions_variable" "variable" {
@@ -145,6 +170,8 @@ resource "github_actions_variable" "variable" {
   repository    = github_repository.repository.id
   variable_name = each.key
   value         = each.value
+
+  depends_on = [github_repository.repository]
 }
 
 resource "github_actions_secret" "secret" {
@@ -153,4 +180,6 @@ resource "github_actions_secret" "secret" {
   repository      = github_repository.repository.id
   secret_name     = each.key
   encrypted_value = each.value
+
+  depends_on = [github_repository.repository]
 }
