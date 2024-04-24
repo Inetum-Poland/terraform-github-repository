@@ -35,7 +35,12 @@ resource "github_repository" "repository" {
   merge_commit_message        = var.github_repository.merge_commit_message
   delete_branch_on_merge      = var.github_repository.delete_branch_on_merge
 
-  license_template                        = var.github_repository.license_template == null ? (var.github_repository.visibility == "private" ? "unlicense" : "mit") : var.github_repository.license_template
+  license_template = var.github_repository.auto_init == true ? (
+    var.github_repository.license_template == null ? (
+      var.github_repository.visibility == "private" ? "unlicense" : "mit"
+    ) : var.github_repository.license_template
+  ) : null
+
   archive_on_destroy                      = var.github_repository.archive_on_destroy
   web_commit_signoff_required             = var.github_repository.web_commit_signoff_required
   vulnerability_alerts                    = var.github_repository.vulnerability_alerts
@@ -102,6 +107,11 @@ resource "github_repository" "repository" {
 }
 
 resource "github_branch_default" "branch" {
+  count = (
+    var.github_branch_default == null ||
+    var.github_repository.auto_init == false
+  ) ? 0 : 1
+
   repository = github_repository.repository.id
   branch     = var.github_branch_default
 
@@ -110,7 +120,10 @@ resource "github_branch_default" "branch" {
 
 #trivy:ignore:AVD-GIT-0004 No need to sign commits
 resource "github_branch_protection" "branch" {
-  for_each = var.github_branch_protection
+  for_each = (
+    var.github_branch_protection == null ||
+    var.github_repository.auto_init == false
+  ) ? {} : var.github_branch_protection
 
   repository_id = github_repository.repository.id
   pattern       = each.value.pattern
