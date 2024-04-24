@@ -62,14 +62,6 @@ variable "github_repository" {
   description = "Repository settings object `github_repository`."
 }
 
-variable "github_branch" {
-  type = list(string)
-
-  description = "Branch repository settings object `github_branch`."
-
-  default = ["main"]
-}
-
 variable "github_branch_default" {
   type = string
 

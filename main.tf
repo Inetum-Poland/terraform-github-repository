@@ -101,15 +101,6 @@ resource "github_repository" "repository" {
   }
 }
 
-resource "github_branch" "branch" {
-  for_each = toset(var.github_branch)
-
-  repository = github_repository.repository.id
-  branch     = each.value
-
-  depends_on = [github_repository.repository]
-}
-
 resource "github_branch_default" "branch" {
   repository = github_repository.repository.id
   branch     = var.github_branch_default

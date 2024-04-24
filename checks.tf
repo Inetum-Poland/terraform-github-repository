@@ -21,13 +21,6 @@ check "repo_visibility_check" {
   }
 }
 
-check "repo_branch_check" {
-  assert {
-    condition     = contains(var.github_branch, var.github_branch_default)
-    error_message = "Default must be in branch list."
-  }
-}
-
 check "repo_security_check" {
   assert {
     condition     = contains(["enabled", "disabled"], coalesce(var.github_repository.security_and_analysis, { advanced_security = { status = "enabled" } }).advanced_security.status, )
