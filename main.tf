@@ -158,10 +158,6 @@ resource "github_branch_protection" "branch" {
     github_branch_default.branch,
     github_repository.repository
   ]
-
-  lifecycle {
-    replace_triggered_by = [github_repository.repository.id]
-  }
 }
 
 resource "github_actions_variable" "variable" {
