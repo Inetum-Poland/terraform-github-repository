@@ -10,7 +10,7 @@ check "repo_name_check" {
 check "repo_name_underscore_check" {
   assert {
     condition     = !strcontains("_", var.github_repository.name)
-    error_message = "Must not contain an underscore (_)."
+    error_message = "Repository name must not contain an underscore (_)."
   }
 }
 
