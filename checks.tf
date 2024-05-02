@@ -9,7 +9,7 @@ check "repo_name_check" {
 
 check "repo_name_underscore_check" {
   assert {
-    condition     = !strcontains("_", var.github_repository.name)
+    condition     = can(regex("^[0-9A-Za-z-]+$", var.github_repository.name))
     error_message = "Repository name must not contain an underscore (_)."
   }
 }
