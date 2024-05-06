@@ -37,7 +37,7 @@ resource "github_repository" "repository" {
 
   license_template = var.github_repository.auto_init == true ? (
     var.github_repository.license_template == null ? (
-      var.github_repository.visibility == "private" ? "unlicense" : "mit"
+      var.github_repository.visibility == "private" ? null : "mit"
     ) : var.github_repository.license_template
   ) : null
 
