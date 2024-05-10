@@ -8,5 +8,5 @@ updates:
       time: "09:00"
       timezone: "Europe/Warsaw"
     labels:
-      - "gha"
+      - "github_actions"
       - "dependencies"

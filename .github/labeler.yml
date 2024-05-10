@@ -1,4 +1,4 @@
-doc:
+documentation:
 - changed-files:
   - any-glob-to-any-file:
     - '**/*.md'
@@ -9,7 +9,7 @@ feature:
 fix:
   - head-branch: ['^fix', 'fix']
 
-tf:
+terraform:
   - changed-files:
     - any-glob-to-any-file:
       - '**/*.tf'

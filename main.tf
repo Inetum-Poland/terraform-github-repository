@@ -193,3 +193,12 @@ resource "github_dependabot_secret" "secret" {
 
   depends_on = [github_repository.repository]
 }
+
+resource "github_issue_label" "label" {
+  for_each = { for obj in var.github_issue_label : obj.name => obj.value }
+
+  repository = github_repository.repository.id
+
+  name  = each.key
+  color = each.value
+}

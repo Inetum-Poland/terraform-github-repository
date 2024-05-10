@@ -125,3 +125,11 @@ variable "github_dependabot_secret" {
 
   default = {}
 }
+
+variable "github_issue_label" {
+  type = list(object({ name = string, value = string, description = optional(string, null) }))
+
+  description = "Issue labels repository settings object `github_issue_label`."
+
+  default = []
+}
