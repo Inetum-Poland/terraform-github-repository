@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: bumper
-        uses: inetum-poland/action-bumper@v2.0.6
+        uses: inetum-poland/action-bumper@v2.1.1
         with:
           fail_if_no_bump: true
           bump_semver: true
