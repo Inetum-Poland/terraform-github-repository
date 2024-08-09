@@ -195,10 +195,11 @@ resource "github_dependabot_secret" "secret" {
 }
 
 resource "github_issue_label" "label" {
-  for_each = { for obj in var.github_issue_label : obj.name => obj.value }
+  for_each = var.github_issue_label
 
   repository = github_repository.repository.id
 
-  name  = each.key
-  color = each.value
+  name        = each.value.name
+  color       = each.value.color
+  description = each.value.description
 }
