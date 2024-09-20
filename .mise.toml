@@ -1,0 +1,15 @@
+[tools]
+opentofu        = "1.8"
+pre-commit      = 'latest'
+python          = '3.12'
+terraform       = "1.8"
+terraform-docs  = 'latest'
+trivy           = 'latest'
+trufflehog      = 'latest'
+
+[plugins]
+trufflehog = 'https://github.com/Inetum-Poland/asdf-trufflehog.git'
+
+[settings]
+legacy_version_file_disable_tools = ['terraform']
+not_found_auto_install            = true
