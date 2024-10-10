@@ -8,6 +8,7 @@ terraform {
 }
 
 #trivy:ignore:AVD-GIT-0001 No sensitive information
+#trivy:ignore:AVD-GIT-0003 This is configurable
 resource "github_repository" "repository" {
   name        = var.github_repository.name
   description = var.github_repository.description
@@ -29,10 +30,10 @@ resource "github_repository" "repository" {
   allow_rebase_merge          = var.github_repository.allow_rebase_merge
   allow_auto_merge            = var.github_repository.allow_auto_merge
   allow_update_branch         = var.github_repository.allow_update_branch
-  squash_merge_commit_title   = var.github_repository.squash_merge_commit_title
-  squash_merge_commit_message = var.github_repository.squash_merge_commit_message
-  merge_commit_title          = var.github_repository.merge_commit_title
-  merge_commit_message        = var.github_repository.merge_commit_message
+  squash_merge_commit_title   = var.github_repository.allow_squash_merge ? var.github_repository.squash_merge_commit_title : null
+  squash_merge_commit_message = var.github_repository.allow_squash_merge ? var.github_repository.squash_merge_commit_message : null
+  merge_commit_title          = var.github_repository.allow_merge_commit ? var.github_repository.merge_commit_title : null
+  merge_commit_message        = var.github_repository.allow_merge_commit ? var.github_repository.merge_commit_message : null
   delete_branch_on_merge      = var.github_repository.delete_branch_on_merge
 
   license_template = var.github_repository.auto_init == true ? (
