@@ -1,5 +1,5 @@
 formatter: "markdown table" # this is required
-version: "0.19"
+version: "~>0"
 # header-from: ""
 # footer-from: ""
 recursive:
