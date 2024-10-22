@@ -347,6 +347,8 @@ resource "github_repository_ruleset" "ruleset" {
       include = each.value.conditions.ref_name.include
     }
   }
+
+  depends_on = [github_repository.repository]
 }
 
 resource "github_actions_variable" "variable" {
