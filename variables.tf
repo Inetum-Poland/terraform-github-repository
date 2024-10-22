@@ -36,7 +36,7 @@ variable "github_repository" {
     template = optional(object({
       owner                = string
       repository           = any
-      include_all_branches = bool
+      include_all_branches = optional(bool, false)
     }), null)
 
     pages = optional(object({
@@ -69,7 +69,7 @@ variable "github_branch_default" {
 
   description = "Default branch repository settings object `github_branch_default`."
 
-  default = "main"
+  default = null
 }
 
 # TO BE DEPRECATED
