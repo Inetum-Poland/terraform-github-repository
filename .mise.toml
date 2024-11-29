@@ -13,3 +13,6 @@ trufflehog = 'https://github.com/Inetum-Poland/asdf-trufflehog.git'
 [settings]
 legacy_version_file_disable_tools = ['terraform']
 not_found_auto_install            = true
+
+[alias]
+python = 'asdf:asdf-community/asdf-python'
