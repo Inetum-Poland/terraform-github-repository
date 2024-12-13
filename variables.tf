@@ -41,8 +41,8 @@ variable "github_repository" {
 
     pages = optional(object({
       source = optional(object({
-        branch = string
-        path   = string
+        branch = optional(string)
+        path   = optional(string)
       }), null)
 
       build_type = string
