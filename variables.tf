@@ -1,3 +1,8 @@
+variable "github_tags" {
+  type    = map(string)
+  default = {}
+}
+
 variable "github_repository" {
   type = object({
     name        = string
