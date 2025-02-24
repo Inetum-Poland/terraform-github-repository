@@ -5,6 +5,11 @@ on:
     branches:
       - main
   pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
     branches:
       - main
 
@@ -12,4 +17,5 @@ jobs:
   verify:
     name: "Verify"
     uses: Inetum-Poland/.github/.github/workflows/verify.yml@main
+    if: github.event.pull_request.draft == false
     secrets: inherit

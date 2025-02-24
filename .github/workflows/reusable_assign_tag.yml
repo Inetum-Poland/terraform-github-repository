@@ -13,11 +13,13 @@ on:
       - opened
       - reopened
       - synchronize
+      - ready_for_review
 
 jobs:
   assign:
     name: "Assign"
     uses: Inetum-Poland/.github/.github/workflows/assign_tag.yml@main
+    if: github.event.pull_request.draft == false
     with:
       bump_fail_if_no_level: true
       bump_latest: true

@@ -7,9 +7,11 @@ on:
       - reopened
       - synchronize
       - edited
+      - ready_for_review
 
 jobs:
   verify:
     name: "Verify"
     uses: Inetum-Poland/.github/.github/workflows/verify_semantic_pr.yml@main
+    if: github.event.pull_request.draft == false
     secrets: inherit
