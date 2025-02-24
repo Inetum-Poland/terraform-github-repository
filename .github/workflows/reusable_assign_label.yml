@@ -13,8 +13,10 @@ on:
       - opened
       - reopened
       - synchronize
+      - ready_for_review
 
 jobs:
   assign:
     name: "Assign"
     uses: Inetum-Poland/.github/.github/workflows/assign_label.yml@main
+    if: github.event.pull_request.draft == false
