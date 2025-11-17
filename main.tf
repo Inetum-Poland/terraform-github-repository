@@ -18,6 +18,10 @@ resource "github_repository" "repository" {
 
   # auto_init   = var.github_repository.auto_init
 
+  fork         = var.github_repository.fork
+  source_owner = var.github_repository.source_owner
+  source_repo  = var.github_repository.source_repo
+
   has_discussions = var.github_repository.has_discussions
   has_downloads   = var.github_repository.has_downloads
   has_issues      = var.github_repository.has_issues
