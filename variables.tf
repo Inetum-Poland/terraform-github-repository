@@ -8,6 +8,10 @@ variable "github_repository" {
 
     # auto_init   = optional(bool, true)
 
+    fork         = optional(bool, false)
+    source_owner = optional(string)
+    source_repo  = optional(string)
+
     has_downloads   = optional(bool, false)
     has_issues      = optional(bool, false)
     has_projects    = optional(bool, false)
